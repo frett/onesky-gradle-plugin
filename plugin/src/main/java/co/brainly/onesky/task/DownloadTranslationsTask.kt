@@ -58,7 +58,7 @@ open class DownloadTranslationsTask @Inject constructor(
         languages.forEachIndexed { languageIndex, language ->
             files.forEachIndexed { fileIndex, filename ->
                 progressLogger.progress(
-                    "${language.code}: $filename (${languageIndex * files.size + fileIndex}/$totalFiles)"
+                    "${language.resolvedLocale}: $filename (${languageIndex * files.size + fileIndex}/$totalFiles)"
                 )
                 client.fetchTranslation(projectId, filename, language, fileNamePrefix = moduleName).handle(
                     onSuccess = { saveTranslation(language, filename, it) },
@@ -99,7 +99,7 @@ open class DownloadTranslationsTask @Inject constructor(
         throwable: Throwable
     ) {
         logger.warn(
-            "Download failed for ${language.english_name} - ${language.code} ($filename), " +
+            "Download failed for ${language.english_name} - ${language.resolvedLocale} ($filename), " +
                 "reason: ${throwable.message}"
         )
     }
@@ -112,13 +112,13 @@ open class DownloadTranslationsTask @Inject constructor(
         get() {
             return when {
                 downloadBaseLanguage && is_base_language -> "values"
-                code.contains("-") -> {
-                    val (locale, region) = code.split("-")
+                resolvedLocale.contains("-") -> {
+                    val (locale, region) = resolvedLocale.split("-")
                     "values-$locale-r$region"
                 }
                 // https://developer.android.com/reference/java/util/Locale.html#toLanguageTag()
-                code == "id" -> "values-in"
-                else -> "values-$code"
+                resolvedLocale == "id" -> "values-in"
+                else -> "values-$resolvedLocale"
             }
         }
 
