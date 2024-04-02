@@ -6,6 +6,5 @@ pluginManagement {
 }
 
 include(":plugin")
-include(":sample")
 
 
