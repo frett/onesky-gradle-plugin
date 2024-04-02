@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     `kotlin-dsl`
-    id("com.gradle.plugin-publish") version "1.1.0"
+    id("com.gradle.plugin-publish") version "1.2.1"
     `maven-publish`
 }
 
@@ -12,14 +12,10 @@ apply(plugin = "org.jlleitschuh.gradle.ktlint")
 group = "co.brainly"
 version = "1.7.0-SNAPSHOT"
 
-pluginBundle {
-    website = "https://brainly.com"
-    vcsUrl = "https://github.com/brainly/onesky-gradle-plugin"
-    description = "Sync your translations files with OneSky"
-    tags = listOf("android", "onesky", "localization")
-}
-
 gradlePlugin {
+    website.set("https://brainly.com")
+    vcsUrl.set("https://github.com/brainly/onesky-gradle-plugin")
+
     plugins {
         register("onesky-gradle") {
             id = "co.brainly.onesky"
@@ -31,7 +27,6 @@ gradlePlugin {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        languageVersion = "1.7"
         freeCompilerArgs = freeCompilerArgs + listOf("-Xopt-in=kotlin.contracts.ExperimentalContracts")
     }
 }
