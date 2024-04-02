@@ -53,7 +53,7 @@ open class DownloadTranslationsTask @Inject constructor(
 
     private fun downloadLanguages(languageListResponse: LanguageListResponse) {
         val languages = languageListResponse.data
-            .filter { downloadLanguages.isEmpty() || it.code in downloadLanguages }
+            .filter { downloadLanguages.isEmpty() || it.resolvedLocale in downloadLanguages }
             .filter { downloadBaseLanguage || !it.is_base_language }
 
         val totalFiles = languages.size * files.size
