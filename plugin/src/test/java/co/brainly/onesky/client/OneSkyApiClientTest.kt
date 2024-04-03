@@ -36,39 +36,39 @@ class OneSkyApiClientTest {
         )
 
         val expected = listOf(
-            Language("en", "English", true, "100.0%"),
-            Language("fr", "French", false, "100.0%"),
-            Language("ru", "Russian", false, "98.1%"),
-            Language("tr", "Turkish", false, "100.0%"),
-            Language("pl", "Polish", false, "100.0%"),
-            Language("ro", "Romanian", false, "100.0%"),
-            Language("kn-IN", "Kannada (India)", false, "0.0%"),
-            Language("hi-IN", "Hindi (India)", false, "98.1%"),
-            Language("ta-IN", "Tamil (India)", false, "0.0%"),
-            Language("uk", "Ukrainian", false, "99.2%"),
-            Language("te-IN", "Telugu (India)", false, "0.0%"),
-            Language("id", "Indonesian", false, "99.8%"),
-            Language("ms", "Malay", false, "0.0%"),
-            Language("pa", "Punjabi", false, "0.1%"),
-            Language("bn-IN", "Bengali (India)", false, "0.0%"),
-            Language("ml-IN", "Malayalam (India)", false, "98.1%"),
-            Language("pt-BR", "Portuguese (Brazil)", false, "99.9%"),
-            Language("en-IN", "English (India)", false, "0.0%"),
-            Language("mr", "Marathi", false, "96.9%"),
-            Language("gu-IN", "Gujarati (India)", false, "0.0%"),
-            Language("or-IN", "Oriya (India)", false, "100.0%"),
-            Language("bn", "Bengali", false, "100.0%"),
-            Language("ta", "Tamil", false, "100.0%"),
-            Language("ur-IN", "Urdu (India)", false, "0.0%"),
-            Language("en-US", "English (United States)", false, "0.0%"),
-            Language("pa-IN", "Punjabi (India)", false, "93.8%"),
-            Language("es-ES", "Spanish (Spain)", false, "100.0%"),
-            Language("hi", "Hindi", false, "98.1%"),
-            Language("gu", "Gujarati", false, "96.6%"),
-            Language("kn", "Kannada", false, "90.9%"),
-            Language("ml", "Malayalam", false, "0.0%"),
-            Language("or", "Oriya", false, "0.0%"),
-            Language("te", "Telugu", false, "98.1%")
+            Language("en", null, "English", true, "100.0%"),
+            Language("fr", null, "French", false, "100.0%"),
+            Language("ru", null, "Russian", false, "98.1%"),
+            Language("tr", null, "Turkish", false, "100.0%"),
+            Language("pl", null, "Polish", false, "100.0%"),
+            Language("ro", null, "Romanian", false, "100.0%"),
+            Language("kn-IN", null, "Kannada (India)", false, "0.0%"),
+            Language("hi-IN", null, "Hindi (India)", false, "98.1%"),
+            Language("ta-IN", null, "Tamil (India)", false, "0.0%"),
+            Language("uk", null, "Ukrainian", false, "99.2%"),
+            Language("te-IN", null, "Telugu (India)", false, "0.0%"),
+            Language("id", null, "Indonesian", false, "99.8%"),
+            Language("ms", null, "Malay", false, "0.0%"),
+            Language("pa", null, "Punjabi", false, "0.1%"),
+            Language("bn-IN", null, "Bengali (India)", false, "0.0%"),
+            Language("ml-IN", null, "Malayalam (India)", false, "98.1%"),
+            Language("pt-BR", null, "Portuguese (Brazil)", false, "99.9%"),
+            Language("en-IN", null, "English (India)", false, "0.0%"),
+            Language("mr", null, "Marathi", false, "96.9%"),
+            Language("gu-IN", null, "Gujarati (India)", false, "0.0%"),
+            Language("or-IN", null, "Oriya (India)", false, "100.0%"),
+            Language("bn", null, "Bengali", false, "100.0%"),
+            Language("ta", null, "Tamil", false, "100.0%"),
+            Language("ur-IN", null, "Urdu (India)", false, "0.0%"),
+            Language("en-US", null, "English (United States)", false, "0.0%"),
+            Language("pa-IN", null, "Punjabi (India)", false, "93.8%"),
+            Language("es-ES", null, "Spanish (Spain)", false, "100.0%"),
+            Language("hi", "Hinglish LAT-IN", "Hindi", false, "98.1%"),
+            Language("gu", null, "Gujarati", false, "96.6%"),
+            Language("kn", null, "Kannada", false, "90.9%"),
+            Language("ml", null, "Malayalam", false, "0.0%"),
+            Language("or", null, "Oriya", false, "0.0%"),
+            Language("te", null, "Telugu", false, "98.1%")
         )
 
         assertEquals(expected, response.getOrNull()?.data)
@@ -78,7 +78,7 @@ class OneSkyApiClientTest {
     fun `downloads a translation file`() {
         server.enqueueResponseWithFilesContent("example_translation_file.xml")
 
-        val language = Language("fr", "French", false, "100.0%")
+        val language = Language("fr", null, "French", false, "100.0%")
         val translationResult = client.fetchTranslation(projectId, "strings.xml", language)
 
         assertEquals(
